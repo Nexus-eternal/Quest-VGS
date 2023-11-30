@@ -49,12 +49,20 @@ class Scene:
 
 root = tk.Tk()
 
+# Level 0
 Intro = Scene(root, 'images\_tent.jpg', "scenes_text\Intro.txt", ["scene1a.draw_scene()", "scene1b.draw_scene()"], ["Gå ut fra telt", "Sove mer"], None)
-scene1a = Scene(root, 'images\warchief.jpg', "scenes_text\Intro.txt", ["scene2a.draw_scene()", ""], ["AAAAAAA", "BBBBBB"], ['scene1b','Intro'])
-scene1b = Scene(root, 'images\_tent.jpg', "scenes_text\scene1b.txt", ["scene1a.draw_scene()", "scene1b.draw_scene()"], ["Gå ut fra telt", "Sove mer"], ['Intro'])
-scene2a = Scene(root, 'images\warchief.jpg', "scenes_text\Intro.txt", [""], ["AAAAAAA"], ['scene1a'])
+
+# Level 1
+scene1a = Scene(root, 'images\warchief.jpg', "scenes_text\scene_1a.txt", ["", ""], ["Alver? Har?! Samle troppen!", "Alver? Kanskje, vi kan bli enige?"], ['scene1b','Intro'])
+scene1b = Scene(root, 'images\_tent.jpg', "scenes_text\scene_1b.txt", ["scene1a.draw_scene()", "scene2c.draw_scene()"], ["Våkn opp og gå ut fra telt", "Sove mer"], ['Intro'])
+
+# Level 2
+scene2c = Scene(root, 'images\dead.jpg', "scenes_text\dead_2b.txt", [], [], ['scene1b'])
+
+
+# Launch level 0
 Intro.draw_scene()
 
-
+# Launch gameloop
 root.mainloop()
 
