@@ -1,23 +1,28 @@
 import tkinter as tk
 from PIL import Image, ImageTk
-import scenes as sc
+
+def clear_frame(frame):
+    for i in frame.winfo_children():
+        i.destroy()
+    frame.pack_forget()
 
 class Scene:
-    def __init__(self, root, image_path, text_path, command_1, command_2, option_1, option_2):
+    def __init__(self, root, image_path, text_path, command_1, command_2, option_1, option_2, previous_scene):
         self.root = root
         self.mainframe = tk.Frame(self.root)
-        self.mainframe.pack()
         self.image_path = image_path
         self.text_path = text_path
-
         self.command_1 = command_1
         self.command_2 = command_2
         self.option_1 = option_1
         self.option_2 = option_2
+        self.previous_scene = previous_scene
     
     def draw_scene(self):
         # Clear everything from previous scene
-        sc.clear_frame(self.mainframe)
+        if self != Intro:
+            clear_frame(self.previous_scene.mainframe)
+        self.mainframe.pack()
 
         # Unpacking image and placing it
         image = Image.open(self.image_path)
@@ -42,8 +47,9 @@ class Scene:
 
 root = tk.Tk()
 
-Intro = Scene(root, 'images\_tent.jpg', "scenes_text\Into.txt", "scene1a.draw_scene()", "scene1a.draw_scene()", "Aboba", "Baobab")
-scene1a = Scene(root, 'images\warchief.jpg', "scenes_text\Into.txt", Intro, Intro, "AAAAAAA", "BBBBBB")
+Intro = Scene(root, 'images\_tent.jpg', "scenes_text\Intro.txt", "scene1a.draw_scene()", "scene1b.draw_scene()", "Gå ut fra telt", "Sove mer", None)
+scene1a = Scene(root, 'images\warchief.jpg', "scenes_text\Intro.txt", "", "", "AAAAAAA", "BBBBBB", Intro)
+scene1b = Scene(root, 'images\_tent.jpg', "scenes_text\scene1b.txt", "", "scene1b.draw_scene()", "AAAAAAA", "Sove mer", Intro)
 Intro.draw_scene()
 
 
