@@ -87,12 +87,31 @@ scene1b = Scene(root, 'images\_tent.jpg', "scenes_text\scene_1b.txt", ["scene1a.
 
 # Level 2
 scene2a = Scene(root, 'images\_ranger.jpg', "scenes_text\scene_2a.txt", ["scene3a.launch_scene()", "scene3b.launch_scene()"], ["Ha, grisseøret søppel! Gi opp og...", "Vi vil snakke med lederene dine!"], ['scene1a'], ['',''])
-scene2b = Scene(root, 'images\druid.jpg', "scenes_text\scene_2b.txt", ["", ""], ["Våkn opp og gå ut fra telt", "Sove mer"], ['scene1a'], ['',''])
+scene2b = Scene(root, 'images\druid.jpg', "scenes_text\scene_2b.txt", ["scene3c.launch_scene()", "scene3c.launch_scene()"], ["Selvfølgelig! Da hvor mye øl trenger dere?", "Glad å hjelpe deg! Så hva egentlig trenger dere?"], ['scene1a'], ['',''])
 scene2c = Scene(root, 'images\dead.jpg', "scenes_text\dead_2c.txt", [], [], ['scene1b'], [])
 
 # Level 3
-scene3a = Scene(root, 'images\dead.jpg', "scenes_text\dead_3a.txt", [], [], ['scene2a'], [])
-scene3b = Scene(root, 'images\_ranger.jpg', "scenes_text\scene_3b.txt", ["scene3a.launch_scene()", ""], ["Ha, grisseøret søppel! Gi opp og...", "Vi vil snakke med lederene dine!"], ['scene2a'], ['',''])
+# Ranger line
+scene3a = Scene(root, 'images\dead.jpg', "scenes_text\dead_3a.txt", [], [], ['scene2a', 'scene3b'], [])
+scene3b = Scene(root, 'images\_ranger.jpg', "scenes_text\scene_3b.txt", ["scene3a.launch_scene()", "scene4a.launch_scene()"], ["Ha, hvis du virkelig vil være alene med meg...", "Selvfølgelig! Vi har mye å snakke om"], ['scene2a'], ['',''])
+# Druid line
+scene3c = Scene(root, 'images\druid.jpg', "scenes_text\scene_3c.txt", ["scene3d.launch_scene()","scene4a.launch_scene()"], ["Du vet, jeg vil ikke kom til leiren. Men hvis DU går til meg...", "Ja, hvorfor ikke? Da vil du ta meg gjennom?"], ['scene2b'], ['',''])
+scene3d = Scene(root, 'images\dead.jpg', "scenes_text\dead_3d.txt", [], [], ['scene3c', 'scene3b'], [])
+
+# Level 4
+# Camp line
+scene4a = Scene(root, 'images\camp.jpg', "scenes_text\scene_4a.txt", ["scene5a_1.launch_scene()"], ["Kom inn etter hun"], ['scene3c', 'scene3b'], [])
+
+# Level 5
+scene5a_1 = Scene(root, 'images\meeting.jpg', "scenes_text\scene_5a_1.txt", ["scene5a_2.launch_scene()"], ["Neste"], ['scene4a'], [])
+scene5a_2 = Scene(root, 'images\meeting.jpg', "scenes_text\scene_5a_2.txt", ["scene5a_3.launch_scene()"], ["Neste"], ['scene5a_1'], [])
+scene5a_3 = Scene(root, 'images\meeting.jpg', "scenes_text\scene_5a_3.txt", ["scene5a_4.launch_scene()"], ["Neste"], ['scene5a_2'], [])
+scene5a_4 = Scene(root, 'images\meeting.jpg', "scenes_text\scene_5a_4.txt", ["scene5a_5.launch_scene()"], ["Neste"], ['scene5a_3'], [])
+scene5a_5 = Scene(root, 'images\meeting.jpg', "scenes_text\scene_5a_5.txt", ["scene_6b.launch_scene()", "scene_6b.launch_scene()"], ["Enig", "Pffff, nei, grisseøret!"], ['scene5a_4'], [])
+
+# Level 6
+Scene_6a = Scene(root, 'images\dead.jpg', "scenes_text\win_6a.txt", [], [], ['scene5a_5'], [])
+Scene_6b = Scene(root, 'images\dead.jpg', "scenes_text\dead_6b.txt", [], [], ['scene5a_5'], [])
 
 
 # Launch level 0
