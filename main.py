@@ -1,13 +1,22 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 
+# Counters
+Elves = 36
+Orcs = 50
+Hatered = 0
+Friendship = 0
+Sleeping = 1
+counters = [Elves, Orcs, Hatered, Friendship, Sleeping]
+
+
 def clear_frame(frame):
     for i in frame.winfo_children():
         i.destroy()
     frame.pack_forget()
 
 class Scene:
-    def __init__(self, root, image_path, text_path, commands, options, previous_scenes):
+    def __init__(self, root, image_path, text_path, commands, options, previous_scenes, triggers):
         self.root = root
         self.mainframe = tk.Frame(self.root)
         self.image_path = image_path
@@ -15,6 +24,7 @@ class Scene:
         self.commands = commands
         self.options = options
         self.previous_scenes = previous_scenes
+        self.triggers = triggers
     
     def draw_scene(self):
         # Clear everything from previous scene
@@ -40,24 +50,49 @@ class Scene:
 
         # Buttons
         index = 1
-        for i in self.commands, self.options:
+        for i in self.commands, self.options, self.triggers:
             exec(f"button{index} = tk.Button(self.mainframe, text=f'{self.options[index-1]}', command=lambda: exec(f'{self.commands[index-1]}'))")
             exec(f"button{index}.grid(row=2, column={index-1})")
+            exec(f"{self.triggers[index-1]}")
             if (index+1) <= len(self.commands):
                 index += 1
+        
+        # Triggers
+        for i in self.triggers:
+            exec(f'{i}')
+        
+    def launch_scene(self):
+        # Counters checking
+        if Sleeping == 5:
+            scene2c.draw_scene()
+        
+        # Main function
+        else:
+            self.draw_scene()
+    
+
+
+
+
     
 
 root = tk.Tk()
 
 # Level 0
-Intro = Scene(root, 'images\_tent.jpg', "scenes_text\Intro.txt", ["scene1a.draw_scene()", "scene1b.draw_scene()"], ["Gå ut fra telt", "Sove mer"], None)
+Intro = Scene(root, 'images\_tent.jpg', "scenes_text\Intro.txt", ["scene1a.launch_scene()", "scene1b.launch_scene()"], ["Gå ut fra telt", "Sove mer"], [], ['',''])
 
 # Level 1
-scene1a = Scene(root, 'images\warchief.jpg', "scenes_text\scene_1a.txt", ["", ""], ["Alver? Har?! Samle troppen!", "Alver? Kanskje, vi kan bli enige?"], ['scene1b','Intro'])
-scene1b = Scene(root, 'images\_tent.jpg', "scenes_text\scene_1b.txt", ["scene1a.draw_scene()", "scene2c.draw_scene()"], ["Våkn opp og gå ut fra telt", "Sove mer"], ['Intro'])
+scene1a = Scene(root, 'images\warchief.jpg', "scenes_text\scene_1a.txt", ["scene2a.launch_scene()", "scene2b.launch_scene()"], ["Alver? Har?! Samle troppen!", "Alver? Kanskje, vi kan bli enige?"], ['scene1b','Intro'], ['Hatered += 1','Friendship += 1'])
+scene1b = Scene(root, 'images\_tent.jpg', "scenes_text\scene_1b.txt", ["scene1a.launch_scene()", "scene2c.launch_scene()"], ["Våkn opp og gå ut fra telt", "Sove mer"], ['Intro'], ['','Sleeping += 1'])
 
 # Level 2
-scene2c = Scene(root, 'images\dead.jpg', "scenes_text\dead_2b.txt", [], [], ['scene1b'])
+scene2a = Scene(root, 'images\_ranger.jpg', "scenes_text\scene_2a.txt", ["scene3a.launch_scene()", "scene3b.launch_scene()"], ["Ha, grisseøret søppel! Gi opp og...", "Vi vil snakke med lederene dine!"], ['scene1a'], ['',''])
+scene2b = Scene(root, 'images\druid.jpg', "scenes_text\scene_2b.txt", ["", ""], ["Våkn opp og gå ut fra telt", "Sove mer"], ['scene1a'], ['',''])
+scene2c = Scene(root, 'images\dead.jpg', "scenes_text\dead_2c.txt", [], [], ['scene1b'], [])
+
+# Level 3
+scene3a = Scene(root, 'images\dead.jpg', "scenes_text\dead_3a.txt", [], [], ['scene2a'], [])
+scene3b = Scene(root, 'images\_ranger.jpg', "scenes_text\scene_3b.txt", ["scene3a.launch_scene()", ""], ["Ha, grisseøret søppel! Gi opp og...", "Vi vil snakke med lederene dine!"], ['scene2a'], ['',''])
 
 
 # Launch level 0
