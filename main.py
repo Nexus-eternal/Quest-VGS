@@ -107,11 +107,11 @@ scene5a_1 = Scene(root, 'images\meeting.jpg', "scenes_text\scene_5a_1.txt", ["sc
 scene5a_2 = Scene(root, 'images\meeting.jpg', "scenes_text\scene_5a_2.txt", ["scene5a_3.launch_scene()"], ["Neste"], ['scene5a_1'], [])
 scene5a_3 = Scene(root, 'images\meeting.jpg', "scenes_text\scene_5a_3.txt", ["scene5a_4.launch_scene()"], ["Neste"], ['scene5a_2'], [])
 scene5a_4 = Scene(root, 'images\meeting.jpg', "scenes_text\scene_5a_4.txt", ["scene5a_5.launch_scene()"], ["Neste"], ['scene5a_3'], [])
-scene5a_5 = Scene(root, 'images\meeting.jpg', "scenes_text\scene_5a_5.txt", ["scene_6b.launch_scene()", "scene_6b.launch_scene()"], ["Enig", "Pffff, nei, grisseøret!"], ['scene5a_4'], [])
+scene5a_5 = Scene(root, 'images\meeting.jpg', "scenes_text\scene_5a_5.txt", ["scene_6a.launch_scene()", "scene_6b.launch_scene()"], ["Enig", "Pffff, nei, grisseøret!"], ['scene5a_4'], ['',''])
 
 # Level 6
-Scene_6a = Scene(root, 'images\dead.jpg', "scenes_text\win_6a.txt", [], [], ['scene5a_5'], [])
-Scene_6b = Scene(root, 'images\dead.jpg', "scenes_text\dead_6b.txt", [], [], ['scene5a_5'], [])
+scene_6a = Scene(root, 'images\handshake.jpg', "scenes_text\win_6a.txt", [], [], ['scene5a_5'], [])
+scene_6b = Scene(root, 'images\dead.jpg', "scenes_text\dead_6b.txt", [], [], ['scene5a_5'], [])
 
 
 # Launch level 0
