@@ -55,6 +55,9 @@ class Scene:
 
  
 root = tk.Tk()
+icon = tk.PhotoImage(file="images\icon.png")
+root.iconphoto(False, icon)
+root.title("Den værste diplomat")
 
 # Level 0
 Intro = Scene(root, 'images\_tent.jpg', "scenes_text\Intro.txt", ["scene1a.draw_scene()", "scene1b.draw_scene()"], ["Gå ut fra telt", "Sove mer"], [], )
