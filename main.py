@@ -41,18 +41,19 @@ class Scene:
         text_label.grid(row=1, column=0, columnspan=2)
 
         # Buttons
-        index = 1
-        for i in self.options, self.commands,:
-            exec(f"button{index} = tk.Button(self.mainframe, text=f'{self.options[index-1]}', command=lambda: exec(f'{self.commands[index-1]}'))")
-            exec(f"button{index}.grid(row=2, column={index-1})")
-            index += 1
-    
+        if len(self.commands) and len(self.options) == 2:
+            index = 1
+            for i in self.options, self.commands,:
+                exec(f"button{index} = tk.Button(self.mainframe, text=f'{self.options[index-1]}', command=lambda: exec(f'{self.commands[index-1]}'))")
+                exec(f"button{index}.grid(row=2, column={index-1}, sticky = 'ew')")
+                index += 1
+        elif len(self.commands) and len(self.options) == 1:
+            index = 1
+            for i in self.options, self.commands,:
+                exec(f"button{index} = tk.Button(self.mainframe, text=f'{self.options[index-1]}', command=lambda: exec(f'{self.commands[index-1]}'),)")
+                exec(f"button{index}.grid(row=2, column={index-1}, columnspan = 2, sticky = 'ew')")
 
-
-
-
-    
-
+ 
 root = tk.Tk()
 
 # Level 0
